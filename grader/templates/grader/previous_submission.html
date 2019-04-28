@@ -1,6 +1,10 @@
-{% extends 'base.html' %} {% block base_head %}
+{% extends 'base.html' %}
+
+{% block base_head %}
 <title>Previous Submissions</title>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 
 <div class="jumbotron" style="padding-top: 15px;padding-left: 10px ;padding-bottom: 5px;margin-bottom:10px;margin-top:8px; ">
 	<h1 style="text-align: center">Previous Submissions</h1>
@@ -27,6 +31,5 @@
 
 </div>
 <a href="{% url 'question:list' %}"><button style="margin-bottom: 20px" type="button" class="btn btn-success">Back To Problems</button></a>
-
 
 {% endblock %}

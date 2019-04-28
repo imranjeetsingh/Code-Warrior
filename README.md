@@ -1,7 +1,7 @@
 
 # Code Warrior
 
-An online judge system that supports the following languages:  
+An online judge that supports the following languages:  
 - C
 - C++
 - Python 2
@@ -11,12 +11,14 @@ An online judge system that supports the following languages:
 ### Tools Used
 
 - **Python** - Django
+- **Javascript**
 - **Bootstrap**
 
 
 ### Third Party Services Used
 
 - **Amazon Web Services (AWS)**: Stores all static and media files.
+- **Heroku**: Used to deploy the project in production environment.
 - **sendgrid**: Used to send transactional emails like email-id verification.
 
 
@@ -25,9 +27,9 @@ An online judge system that supports the following languages:
 1. Clone the repository  
 `git clone https://github.com/morphosis-nitmz/Code-Warrior`
 
-2. Rename the file **credentials-sample.py** in *judge/* to **credentials.py** and replace the value of `SECRET_KEY` with the secret key of your own project. To generate a new secret key
+2. Rename the file **.env-sample** to **.env** and replace the value of `SECRET_KEY` with the secret key of your own project. To generate a new secret key
 	- Go to terminal and create a new django project `django-admin startproject <proj-name>`.
-	- Now get the value of `SECRET_KEY` in *settings.py* and use that as the secret key for the **Code-Warrior project**.
+	- Now get the value of `SECRET_KEY` in *settings.py* and use that as the secret key for the **Stock-Bridge project**.
 	- Now delete that new django project.
 
 3. **Sendgrid setup**:
@@ -38,10 +40,13 @@ An online judge system that supports the following languages:
 4. **Amazon Web Services (AWS) setup**:  
 	Create and setup the IAM User and bucket in AWS, then add all the required values to **credentials.py**
 
-5. Run the following commands  
+5. **Heroku setup**:  
+	Follow this guide to setup Heroku in the project: [Heroku Setup](notes/heroku_setup.md).
+
+6. Run the following commands  
 `python manage.py makemigrations`  
 `python manage.py migrate`  
 `python manage.py collectstatic`
 
-6. Now load the **questions**, **test cases** and **expected outputs** into the database  
+7. Now load the **questions**, **test cases** and **expected outputs** into the database  
 `python manage.py loaddata questions/fixtures/questions.json`

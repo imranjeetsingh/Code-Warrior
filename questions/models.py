@@ -115,7 +115,7 @@ class ExpectedOutput(models.Model):
         ordering = ['file']
 
     def __str__(self):
-        return self.question.code + ' - ' + self.file.name.split('/')[-1]
+        return self.question.code + ' - ' + self.file.name.split('/')[-1] + ' - ' + self.test_case.file.name.split('/')[-1]
 
     @property
     def filename(self):

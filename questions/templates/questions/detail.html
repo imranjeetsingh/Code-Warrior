@@ -1,95 +1,93 @@
-{% extends 'base.html' %} {% block base_head %}
+{% extends 'base.html' %}
+
+{% block base_head %}
 <title>{{ object.code }}</title>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 
 <div class="jumbotron" style="padding-top: 10px;padding-left: 10px ;padding-bottom: 8px;margin-bottom:10px;margin-top:8px;padding-bottom: 15px">
-                <div class="row">
-                <div class="col-sm-2 " style="padding-top: 22px">
-                                <a href="{% url 'home'%}">
-                         <img src="https://image.ibb.co/cFLKpH/CODE_WARRIOR_N.png" alt="CODE_WARRIOR_N" border="0" style="width: 170px;height: 60px">            <!-- <img src="https://image.ibb.co/eaahPH/hackerearth.png" alt="hackerearth" border="0" /> -->
-                        </a>
-                        </div>
-                <div id="head" class="col-sm-4 " style="padding-top: 28px">
-                        <strong>
-                                <h1 id="Code">Code Warrior</h1>
-                        </strong>
-                </div>
-                <div class="col-sm-6 ">
-                        <div id="clockdiv">
-                                <div>
-                                        <span id="hour" class="hours"></span>
-                                        <div class="smalltext">Hours</div>
-                                </div>
-                                <div>
-                                        <span id="minute" class="minutes"></span>
-                                        <div class="smalltext">Minutes</div>
-                                </div>
-                                <div>
-                                        <span id="second" class="seconds"></span>
-                                        <div class="smalltext">Seconds</div>
-                                </div>
-                        </div>
-                        <script>
-                                // Set the date we're counting down to
-                                var countDownDate = new Date("Apr 28, 2018 13:00:00").getTime();
-
-                                // Update the count 	<h1>Countdown Clock</h1>down every 1 second
-                                var x = setInterval(function () {
-
-                                        // Get todays date and time
-                                        var now = new Date().getTime();
-
-                                        // Find the distance between now an the count down date
-                                        var distance = countDownDate - now;
-
-                                        // Time calculations for days, hours, minutes and seconds
-                                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                                        // Output the result in an element with id="demo"
-                                        document.getElementById("hour").innerHTML = hours;
-                                        document.getElementById("minute").innerHTML = minutes;
-                                        document.getElementById("second").innerHTML = seconds;
-
-
-                                        // If the count down is over, write some text 
-                                        if (distance < 0) {
-                                                clearInterval(x);
-                                                document.getElementById("hour").innerHTML = "0";
-                                                document.getElementById("minute").innerHTML = "0";
-                                                document.getElementById("second").innerHTML = "0";
-                                        }
-                                }, 1000);
-                        </script>
-                </div>
+    <div class="row">
+        <div class="col-sm-2 " style="padding-top: 22px">
+            <a href="{% url 'home'%}">
+                <img src="https://image.ibb.co/cFLKpH/CODE_WARRIOR_N.png" alt="CODE_WARRIOR_N" border="0" style="width: 170px;height: 60px">
+            </a>
         </div>
+        <div id="head" class="col-sm-4 " style="padding-top: 28px">
+            <strong><h1 id="Code">Code Warrior</h1></strong>
+        </div>
+        <div class="col-sm-6 ">
+            <div id="clockdiv">
+                <div>
+                    <span id="hour" class="hours"></span>
+                    <div class="smalltext">Hours</div>
+                </div>
+                <div>
+                    <span id="minute" class="minutes"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                    <span id="second" class="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
+            <script>
+                // Set the date we're counting down to
+                var countDownDate = new Date("Apr 28, 2018 13:00:00").getTime();
+
+                // Update the count 	<h1>Countdown Clock</h1>down every 1 second
+                var x = setInterval(function () {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                document.getElementById("hour").innerHTML = hours;
+                document.getElementById("minute").innerHTML = minutes;
+                document.getElementById("second").innerHTML = seconds;
+
+
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("hour").innerHTML = "0";
+                document.getElementById("minute").innerHTML = "0";
+                document.getElementById("second").innerHTML = "0";
+                }
+                }, 1000);
+            </script>
+        </div>
+    </div>
 </div>
 
 
 <div class="jumbotron" style="padding-top: 15px;padding-left: 10px ;padding-bottom: 5px;margin-bottom:10px;margin-top:8px;">
-        <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                        <h3 style="color: rgb(59, 99, 99)" class="text-center">{{ object.code }}: {{ object.title }}</h3>
-                </div>
-                <div class="col-sm-4">
-                        <a style="text-align: end" class="btn btn-primary" href="{% url 'grader:previous_submissions' object.code %}">Previous Submissions</a>
-                </div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <h3 style="color: rgb(59, 99, 99)" class="text-center">{{ object.code }}: {{ object.title }}</h3>
         </div>
+        <div class="col-sm-4">
+            <a style="text-align: end" class="btn btn-primary" href="{% url 'grader:previous_submissions' object.code %}">Previous Submissions</a>
+        </div>
+    </div>
 </div>
 
 <div>
-        
-        <img src="{{ object.description.url }}" style="max-width:100%;height:auto;" >
-        
-        
-        <div class="jumbotron" style="padding-top: 10px;padding-left: 10px ;padding-bottom: 8px;margin-bottom:10px;margin-top:15px;padding-bottom: 20px ">
-                        <a class="btn btn-success" href="{{ object.get_submit_url }}">Submit Solution</a>
-
-        </div>
-        <div style="margin-bottom: 10px"></div>
+    <img src="{{ object.description.url }}" style="max-width:100%;height:auto;">
+    <div class="jumbotron" style="padding-top: 10px;padding-left: 10px ;padding-bottom: 8px;margin-bottom:10px;margin-top:15px;padding-bottom: 20px ">
+        <a class="btn btn-success" href="{{ object.get_submit_url }}">Submit Solution</a>
+    </div>
+    <div style="margin-bottom: 10px"></div>
 </div>
 
 {% endblock %}

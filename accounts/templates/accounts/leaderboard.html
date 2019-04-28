@@ -1,10 +1,17 @@
-{% extends 'base.html' %} {% block base_head %}
+{% extends 'base.html' %}
+
+{% block base_head %}
 <title>LeaderBoard</title>
-{% endblock %} {% block content %} {% if msg %}
-<div class="alert alert-danger alert-dismissible">
-	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	{{msg}}
-</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% if msg %}
+	<div class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		{{msg}}
+	</div>
 {% endif %}
 
 <div class="row">
@@ -27,25 +34,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for object in object_list %} {% if object.username == username%}
-					<tr style="background-color:rgb(224, 129, 129)">
-						<td class="text-center">{{forloop.counter}}</td>
-						<td class="text-center">
-							<a href="{% url 'profile' object.username %}">{{ object.username }}</a>
-						</td>
-						<td class="text-center">{{ object.score }}</td>
-						<td class="text-center">{{ object.total_time }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td class="text-center">{{forloop.counter}}</td>
-						<td class="text-center">
-							<a href="{% url 'profile' object.username %}">{{ object.username }}</a>
-						</td>
-						<td class="text-center">{{ object.score }}</td>
-						<td class="text-center">{{ object.total_time }}</td>
-					</tr>
-					{% endif %} {% endfor %}
+					{% for object in object_list %}
+						{% if object.username == username%}
+							<tr style="background-color:rgb(224, 129, 129)">
+								<td class="text-center">{{forloop.counter}}</td>
+								<td class="text-center">
+									<a href="{% url 'profile' object.username %}">{{ object.username }}</a>
+								</td>
+								<td class="text-center">{{ object.score }}</td>
+								<td class="text-center">{{ object.total_time }}</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td class="text-center">{{forloop.counter}}</td>
+								<td class="text-center">
+									<a href="{% url 'profile' object.username %}">{{ object.username }}</a>
+								</td>
+								<td class="text-center">{{ object.score }}</td>
+								<td class="text-center">{{ object.total_time }}</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
 				</tbody>
 			</table>
 		</div>
@@ -56,4 +65,5 @@
 	<button type="button" class="btn btn-success">Back To Problems</button>
 </a>
 <div style="margin-bottom: 20px"></div>
+
 {% endblock %}  

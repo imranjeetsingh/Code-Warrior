@@ -136,6 +136,9 @@ class Solution(models.Model):
             return 'sigabrt'  # Runtime Error
         except subprocess.TimeoutExpired:
             return 'tle'  # Time Limit Exceeded
+        except Exception as e:
+            print("\nabcdhfvbusrb")
+            print(e)
         return 'success'
 
     def verify(self, expected_output):
@@ -149,11 +152,13 @@ class Solution(models.Model):
             return True
 
     def evaluate(self):
-        fetch_file_cmd = 'wget https:{root}{filename}'
-
+        # fetch_file_cmd = os.chdir(os.path.join(settings.MEDIA_ROOT, os.path.dirname(self.file.name)))
+        # os.chdir(os.path.join(settings.MEDIA_ROOT, os.path.dirname(self.file.name)))
+        # print(self.file.name)
+        # print(os.getcwd())
         # download the file from AWS
         os.chdir(SUBMISSION_EVALUATION_PATH)
-        get_submission = fetch_file_cmd.format(
+        get_submission = 'cp {root}/{filename} .'.format(
             root=settings.MEDIA_ROOT,
             filename=self.file.name
         )
@@ -173,15 +178,16 @@ class Solution(models.Model):
         sigabrt_count = 0
         wa_count = 0
         for t_in in tc_input_dir_contents:
-            # download the test case from AWS
-            get_test_case = fetch_file_cmd.format(
+            get_test_case = 'cp {root}/{filename} .'.format(
                 root=settings.MEDIA_ROOT,
                 filename=t_in.file.name
             )
             process = subprocess.check_output(get_test_case, shell=True)
 
             # run submission against the input test case
+            print(t_in.filename)
             msg = self.execute(t_in.filename)
+            
             if msg != 'success':
                 if msg == 'tle':
                     tle_count += 1
@@ -195,7 +201,7 @@ class Solution(models.Model):
             t_out = ExpectedOutput.objects.get_by_question_test_case(self.question.code, t_in).first()
 
             # download the expected output from AWS
-            get_test_case = fetch_file_cmd.format(
+            get_test_case = 'cp {root}/{filename} .'.format(
                 root=settings.MEDIA_ROOT,
                 filename=t_out.file.name
             )
@@ -204,10 +210,8 @@ class Solution(models.Model):
             # verify the output with the expected output
             if not self.verify(t_out.filename):
                 # self.clear_evaluation_path_contents()
-                # self.save()
-                # return 'wa'
+                self.save()
                 wa_count += 1
-                print("i am wrong")
                 continue
             ac_count += 1
         
@@ -225,7 +229,7 @@ class Solution(models.Model):
         else:
             self.result = 'pc'
 
-        self.clear_evaluation_path_contents()
+        # self.clear_evaluation_path_contents()
         self.save()
 
 

@@ -1,19 +1,12 @@
-import time
-import pytz
 from datetime import datetime
-from datetime import date
-from datetime import time
 from datetime import timedelta
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from django.utils import timezone
-from django.utils.timezone import activate
-from django.utils.timezone import localtime, now
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import get_user_model
 
 from .forms import SolutionForm
 from .models import Solution
@@ -23,17 +16,17 @@ from grader.util import start_time
 User = get_user_model()
 
 
-
 @login_required
 def submit_solution(request, code):
     if request.method == 'POST':
-        # activate(settings.TIME_ZONE)
         current_time = datetime.now()
-        future=start_time+timedelta(hours=2)
-        if current_time>future:
-            data=User.objects.all()
-            username=request.user.username
-            return render(request,'accounts/leaderboard.html',{'object_list':data,'msg':"Contest has ended",'username':username})
+        future = start_time+timedelta(hours=100000)
+        if current_time > future:
+            data = User.objects.all()
+            username = request.user.username
+            return render(request, 'accounts/leaderboard.html', {
+                'object_list': data, 'msg': 'Contest has ended', 'username': username
+            })
         form = SolutionForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
@@ -69,7 +62,7 @@ def check_solution(request, code, pk):
                     submission.user.increment_score(score_diff)
                     submission.user.increment_time(time_diff_up)
             else:
-                time_diff=(datetime.now()-start_time).total_seconds()
+                time_diff = (datetime.now() - start_time).total_seconds()
                 submission.user.increment_score(submission.score)
                 submission.user.increment_time(time_diff)
 

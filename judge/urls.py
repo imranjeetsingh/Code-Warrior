@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^contact/$', contact_page, name='contact'),
     url(r'^leaderboard/$', LeaderBoardView.as_view(), name='leaderboard'),
-    url(r'^profile/(?P<username>[a-z]+)/$', ProfileView.as_view(), name='profile'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/$', ProfileView.as_view(), name='profile'),
     url(r'^account/', include('accounts.urls', namespace='account')),
     url(r'^accounts/', include('accounts.passwords.urls')),
     url(r'^accounts/$', RedirectView.as_view(url='/account')),

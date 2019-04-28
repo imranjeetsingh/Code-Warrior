@@ -13,3 +13,5 @@ psycopg2==2.7.3.2
 GitPython==2.1.7
 Pillow==5.1.0
 awscli==1.15.10
+python-decouple==3.1
+pytz==2018.4
